@@ -1,0 +1,22 @@
+name: Sync Upstream
+on:
+  schedule:
+    - cron: '0 */1 * * *'  # 每6小时同步一次
+  workflow_dispatch:       # 支持手动触发
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 拉取完整历史记录
+      - name: 添加上游仓库
+        run: |
+          git remote add upstream https://github.com/babalae/bettergi-scripts-list.git
+          git fetch upstream
+      - name: 合并上游变更
+        run: |
+          git checkout main  # 或你的默认分支名
+          git merge upstream/main
+          git push origin main
