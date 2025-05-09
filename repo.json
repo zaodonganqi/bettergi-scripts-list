@@ -1,5 +1,5 @@
 {
-  "time": "20250509145141",
+  "time": "20250509165722",
   "url": "https://github.com/babalae/bettergi-scripts-list/archive/refs/heads/main.zip",
   "file": "repo.json",
   "indexes": [
@@ -8672,7 +8672,7 @@
               "type": "directory",
               "children": [
                 {
-                  "name": "01-马尾-荻花洲南x5-晴雪版无草神.json",
+                  "name": "01-马尾-荻花洲南x5.json",
                   "type": "file",
                   "hash": "7f179c31e0b9944c43a24cb9138ee665090758c1",
                   "version": "V1.0-2025-05-08",
@@ -8681,10 +8681,10 @@
                   "tags": [
                     "马尾"
                   ],
-                  "lastUpdated": "2025-05-09 01:13:10"
+                  "lastUpdated": "2025-05-09 16:56:19"
                 },
                 {
-                  "name": "02-马尾-荻花洲西x3-晴雪版无草神.json",
+                  "name": "02-马尾-荻花洲西x3.json",
                   "type": "file",
                   "hash": "bf7b0dec8e61cb19796ffa453c14fbcd9f68b841",
                   "version": "V1.0-2025-05-08",
@@ -8693,10 +8693,10 @@
                   "tags": [
                     "马尾"
                   ],
-                  "lastUpdated": "2025-05-09 01:13:10"
+                  "lastUpdated": "2025-05-09 16:56:19"
                 },
                 {
-                  "name": "03-马尾-归离原x3-晴雪版无草神.json",
+                  "name": "03-马尾-归离原x3.json",
                   "type": "file",
                   "hash": "720e161307b90451e340b221cc5a6506e588fff6",
                   "version": "V1.0-2025-5-8",
@@ -8705,10 +8705,10 @@
                   "tags": [
                     "马尾"
                   ],
-                  "lastUpdated": "2025-05-09 01:13:10"
+                  "lastUpdated": "2025-05-09 16:56:19"
                 },
                 {
-                  "name": "04-马尾-石门东x3-晴雪版无草神.json",
+                  "name": "04-马尾-石门东x3.json",
                   "type": "file",
                   "hash": "24336ae128f79e408372870c893686fb57edaf3b",
                   "version": "V1.0-2025-05-08",
@@ -8717,10 +8717,10 @@
                   "tags": [
                     "马尾"
                   ],
-                  "lastUpdated": "2025-05-09 01:13:10"
+                  "lastUpdated": "2025-05-09 16:56:19"
                 },
                 {
-                  "name": "05-马尾-石门西x10-晴雪版无草神.json",
+                  "name": "05-马尾-石门西x10.json",
                   "type": "file",
                   "hash": "8deca9dabfcb38b52b6027c64c6aca2929821b0b",
                   "version": "V1.0-2025-5-8",
@@ -8729,48 +8729,54 @@
                   "tags": [
                     "马尾"
                   ],
-                  "lastUpdated": "2025-05-09 01:13:10"
+                  "lastUpdated": "2025-05-09 16:56:19"
                 }
               ]
             },
             {
-              "name": "马尾1.json",
-              "type": "file",
-              "hash": "d9bb0009ffb7d026a8b172238a1deef58537fdef",
-              "version": "1.0",
-              "author": "玛卡巴卡",
-              "description": "",
-              "tags": [
-                "马尾",
-                "纳西妲"
-              ],
-              "lastUpdated": "2025-04-04 03:25:12"
-            },
-            {
-              "name": "马尾2.json",
-              "type": "file",
-              "hash": "3212ad300237bc7a1f3a107e3b6b2df11730bfc3",
-              "version": "1.0",
-              "author": "玛卡巴卡",
-              "description": "",
-              "tags": [
-                "马尾",
-                "纳西妲"
-              ],
-              "lastUpdated": "2025-04-04 03:25:12"
-            },
-            {
-              "name": "马尾3.json",
-              "type": "file",
-              "hash": "ab541d780f6d2943f7525776dd5a9ffaf0bf054a",
-              "version": "1.0",
-              "author": "玛卡巴卡",
-              "description": "",
-              "tags": [
-                "马尾",
-                "纳西妲"
-              ],
-              "lastUpdated": "2025-04-04 03:25:12"
+              "name": "马尾@玛卡巴卡",
+              "type": "directory",
+              "children": [
+                {
+                  "name": "马尾1.json",
+                  "type": "file",
+                  "hash": "d9bb0009ffb7d026a8b172238a1deef58537fdef",
+                  "version": "1.0",
+                  "author": "玛卡巴卡",
+                  "description": "",
+                  "tags": [
+                    "马尾",
+                    "纳西妲"
+                  ],
+                  "lastUpdated": "2025-05-09 16:56:19"
+                },
+                {
+                  "name": "马尾2.json",
+                  "type": "file",
+                  "hash": "3212ad300237bc7a1f3a107e3b6b2df11730bfc3",
+                  "version": "1.0",
+                  "author": "玛卡巴卡",
+                  "description": "",
+                  "tags": [
+                    "马尾",
+                    "纳西妲"
+                  ],
+                  "lastUpdated": "2025-05-09 16:56:19"
+                },
+                {
+                  "name": "马尾3.json",
+                  "type": "file",
+                  "hash": "ab541d780f6d2943f7525776dd5a9ffaf0bf054a",
+                  "version": "1.0",
+                  "author": "玛卡巴卡",
+                  "description": "",
+                  "tags": [
+                    "马尾",
+                    "纳西妲"
+                  ],
+                  "lastUpdated": "2025-05-09 16:56:19"
+                }
+              ]
             }
           ]
         },
@@ -45170,7 +45176,7 @@
           "author": "Tool_tingsu",
           "description": "薄荷采集~|~根据设置采集数量和执行时间自动采集薄荷",
           "tags": [],
-          "lastUpdated": "2025-05-06 23:11:53"
+          "lastUpdated": "2025-05-09 16:46:27"
         },
         {
           "name": "YuanQin",
@@ -46769,20 +46775,19 @@
         {
           "name": "盾+后台队.txt",
           "type": "file",
-          "hash": "39ca00589f6e4bbd5cdb40fcc3d76781c087eb9a",
-          "version": "20250501062225",
+          "hash": "343f9f97eba6a1f536d83f69e6543c728d479de0",
+          "version": "20250509164644",
           "author": "苍夏",
-          "description": "V4 生存(钟离，茜特菈莉至少有一个),后台(影,八重,芙宁娜,玛薇卡,千织,5选3,千织绑定钟离)",
+          "description": "V4 生存(钟离，茜特菈莉至少有一个),后台(八重,芙宁娜,玛薇卡,千织,千织绑定钟离)",
           "tags": [
             "钟离",
             "茜特菈莉",
-            "雷电将军",
             "千织",
             "八重神子",
             "芙宁娜",
             "玛薇卡"
           ],
-          "lastUpdated": "2025-05-01 06:22:25"
+          "lastUpdated": "2025-05-09 16:46:44"
         },
         {
           "name": "神鹤万心(无法冲刺打物理).txt",
