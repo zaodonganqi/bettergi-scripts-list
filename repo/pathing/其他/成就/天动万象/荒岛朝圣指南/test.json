@@ -23,7 +23,7 @@
       "action": "",
       "move_mode": "walk",
       "action_params": "",
-      "type": "teleport"
+      "type": "teleport",
     },
     {
       "id": 2,
