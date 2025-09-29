@@ -308,7 +308,7 @@ jobs:
           if [ "$CHANGED_FILES" = "repo/pathing" ]; then
             echo "验证整个目录: repo/pathing"
             set +e
-            python build/validate.py "repo/pathing" --fix | tee -a validation_output.log
+            python build/validate.py "repo/pathing" --fix 2>&1 | tee -a validation_output.log
             PY_EXIT=$?
             set -e
             if [ $PY_EXIT -ne 0 ]; then
@@ -322,7 +322,7 @@ jobs:
               echo "验证文件: $file"
               if [ -f "$file" ]; then
                 set +e
-                python build/validate.py "$file" --fix | tee -a validation_output.log
+                python build/validate.py "$file" --fix 2>&1 | tee -a validation_output.log
                 PY_EXIT=$?
                 set -e
                 if [ $PY_EXIT -ne 0 ]; then
@@ -399,7 +399,7 @@ jobs:
           # 使用引号包裹路径，处理特殊字符
           : > validation_output.log
           set +e
-          python build/validate.py "${VALIDATE_PATH}" $([[ "${AUTO_FIX}" == "true" ]] && echo "--fix") | tee -a validation_output.log
+          python build/validate.py "${VALIDATE_PATH}" $([[ "${AUTO_FIX}" == "true" ]] && echo "--fix") 2>&1 | tee -a validation_output.log
           PY_EXIT=$?
           set -e
           VALIDATION_FAILED=false
