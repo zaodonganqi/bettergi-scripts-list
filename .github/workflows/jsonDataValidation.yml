@@ -4,7 +4,7 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened, edited]
     branches:
-      - workflow
+      - main
     paths:
       - 'repo/pathing/**/*.json'
   workflow_dispatch:
@@ -371,14 +371,7 @@ jobs:
             echo "检测到校验错误，生成校验说明并标记失败"
             {
               echo "### ❌ 校验失败"
-              echo "以下是校验输出（节选）："
-              echo ""
-              echo "```text"
-              # 显示最后200行输出，避免过长
-              tail -n 200 validation_output.log
-              echo "```"
-              echo ""
-              echo "请根据上述错误修复对应的 JSON 文件后重新推送。"
+              echo "请前往 Actions 查看报错详情（运行日志）。"
             } > validation_notes.md
             exit 1
           fi
@@ -412,13 +405,7 @@ jobs:
           if [ "$VALIDATION_FAILED" = true ]; then
             {
               echo "### ❌ 校验失败"
-              echo "以下是校验输出（节选）："
-              echo ""
-              echo "```text"
-              tail -n 200 validation_output.log
-              echo "```"
-              echo ""
-              echo "请根据上述错误修复对应的 JSON 文件后重新推送。"
+              echo "请前往 Actions 查看报错详情（运行日志）。"
             } > validation_notes.md
           fi
           
