@@ -1,4 +1,4 @@
-//当前js版本1.10.0
+//当前js版本1.9.3
 
 let timeMoveUp;
 let timeMoveDown;
@@ -14,16 +14,7 @@ let targetItemPath = "assets/targetItems";
 let mainUITemplate = file.ReadImageMatSync("assets/MainUI.png");
 let itemFullTemplate = file.ReadImageMatSync("assets/itemFull.png");
 let frozenTemplate = file.ReadImageMatSync("assets/解除冰冻.png");
-const frozenRo = RecognitionObject.TemplateMatch(frozenTemplate, 1379, 574, 1463 - 1379, 613 - 574);
-let cookingTemplate = file.ReadImageMatSync("assets/烹饪界面.png");
-const cookingRo = RecognitionObject.TemplateMatch(cookingTemplate, 1547, 965, 1815 - 1547, 1059 - 965);
-let whiteFurinaTemplate = file.ReadImageMatSync("assets/白芙图标.png");
-let whiteFurinaRo = RecognitionObject.TemplateMatch(whiteFurinaTemplate, 1634, 967, 1750 - 1634, 1070 - 967);
-whiteFurinaRo.Threshold = 0.99;
-whiteFurinaRo.InitTemplate();
-
 let targetItems;
-let doFurinaSwitch = false;
 
 let rollingDelay = (+settings.rollingDelay || 25);
 const pickupDelay = (+settings.pickupDelay || 100);
@@ -536,12 +527,6 @@ async function assignGroups(pathings, groupTags) {
 }
 
 async function runPath(fullPath, map_name) {
-    //当需要切换芙宁娜形态时，执行一次强制黑芙
-    if (doFurinaSwitch) {
-        log.info("上条路线识别到白芙，开始强制切换黑芙")
-        doFurinaSwitch = false;
-        await pathingScript.runFile("assets/强制黑芙.json");
-    }
     /* ===== 1. 取得当前路线对象 ===== */
     let currentPathing = null;
     for (let i = 0; i < pathings.length; i++) {
@@ -586,16 +571,16 @@ async function runPath(fullPath, map_name) {
     })();
 
     const errorProcessTask = (async () => {
-        let errorProcessCount = 0;
-        async function checkRo(recognitionObject) {
+        async function checkFrozen() {
             const maxAttempts = 1;
             let attempts = 0;
-            let errorProcessGameRegion;
+            let frozenGameRegion;
             while (attempts < maxAttempts && state.running) {
                 try {
-                    errorProcessGameRegion = captureGameRegion();
-                    const result = errorProcessGameRegion.find(recognitionObject);
-                    errorProcessGameRegion.dispose();
+                    const recognitionObject = RecognitionObject.TemplateMatch(frozenTemplate, 1379, 574, 1463 - 1379, 613 - 574);
+                    frozenGameRegion = captureGameRegion();
+                    const result = frozenGameRegion.find(recognitionObject);
+                    frozenGameRegion.dispose();
                     if (result.isExist()) {
                         return true;
                     }
@@ -609,35 +594,15 @@ async function runPath(fullPath, map_name) {
             return false;
         }
         while (state.running) {
-            if (errorProcessCount % 5 === 0) {
-                //每约250毫秒进行一次冻结检测和白芙检测
-                if (await checkRo(frozenRo)) {
-                    log.info("检测到冻结，尝试挣脱");
-                    for (let m = 0; m < 3; m++) {
-                        keyPress("VK_SPACE");
-                        await sleep(30);
-                    }
-                    continue;
+            if (await checkFrozen()) {
+                log.info("检测到冻结，尝试挣脱");
+                for (let m = 0; m < 3; m++) {
+                    keyPress("VK_SPACE");
+                    await sleep(30);
                 }
-                if (!doFurinaSwitch) {
-                    if (await checkRo(whiteFurinaRo)) {
-                        log.info("检测到白芙，本路线运行结束后切换芙宁娜形态");
-                        doFurinaSwitch = true;
-                        continue;
-                    }
-                }
+            } else {
+                await sleep(500);
             }
-            if (errorProcessCount % 100 === 0) {
-                //每约5000毫秒进行一次烹饪检测
-                if (await checkRo(cookingRo)) {
-                    log.info("检测到烹饪界面，尝试脱离");
-                    keyPress("VK_ESCAPE");
-                    await sleep(500);
-                    continue;
-                }
-            }
-            errorProcessCount++;
-            await sleep(45);
         }
     })();
 
@@ -1222,10 +1187,77 @@ async function copyPathingsByGroup(pathings) {
     }
 }
 
+// =================== 卡尔曼滤波剩余时间预测（适配随机变速运动）===================
+class KalmanEstimator {
+    constructor() {
+        // 状态：效率比（实际用时/预计用时）的估计值
+        // 初始假设效率比为1.0（完全按照预计执行）
+        this.efficiencyRatio = 1.0;
+        // 效率比的不确定性（方差）
+        this.uncertainty = 0.1;  // 初始不确定度
+        // 过程噪声：效率比可能随机变化
+        this.q = 0.02;   // 效率比每步可能变化2%
+        // 测量噪声：单条路线测量有一定误差
+        this.r = 0.05;   // 测量误差5%
+        this.initialized = false;
+    }
+    
+    /**
+     * 更新效率比估计
+     * @param {number} singlePathActualTime - 刚完成路线的实际用时（秒）
+     * @param {number} singlePathPlannedTime - 刚完成路线的预计用时（秒）
+     * @returns {number} 更新后的效率比估计
+     */
+    updateEfficiency(singlePathActualTime, singlePathPlannedTime) {
+        if (singlePathPlannedTime <= 0) return this.efficiencyRatio;
+        
+        // 观测值：这条路线的实际效率比
+        const observedRatio = singlePathActualTime / singlePathPlannedTime;
+        
+        if (!this.initialized) {
+            // 第一次：直接用观测值
+            this.efficiencyRatio = observedRatio;
+            this.initialized = true;
+            return this.efficiencyRatio;
+        }
+        
+        // 预测步骤：效率比可能略有变化（随机游走）
+        // 预测值 = 当前估计值，但不确定性增加
+        const predictedRatio = this.efficiencyRatio;
+        this.uncertainty += this.q;  // 不确定性增加
+        
+        // 更新步骤：用卡尔曼增益融合观测值
+        // 卡尔曼增益：根据不确定性和测量噪声决定相信多少观测值
+        const kalmanGain = this.uncertainty / (this.uncertainty + this.r);
+        
+        // 更新效率比：融合预测值和观测值
+        this.efficiencyRatio = predictedRatio + kalmanGain * (observedRatio - predictedRatio);
+        
+        // 更新不确定性：观测后不确定性降低
+        this.uncertainty = (1 - kalmanGain) * this.uncertainty;
+        
+        return this.efficiencyRatio;
+    }
+    
+    /**
+     * 预测剩余时间
+     * @param {number} remainingPlannedTime - 剩余路线的预计总时间
+     * @returns {number} 预测的剩余实际时间
+     */
+    predictRemainingTime(remainingPlannedTime) {
+        // 用估计的效率比乘以剩余预计时间
+        return remainingPlannedTime * this.efficiencyRatio;
+    }
+}
+// ===================（卡尔曼滤波结束）===================
+
 async function processPathingsByGroup(pathings, accountName) {
     let lastX = 0;
     let lastY = 0;
     let runningFailCount = 0;
+    
+    // 初始化卡尔曼滤波器
+    const kalmanFilter = new KalmanEstimator();
 
     // 定义路径组名称到组号的映射（10 个）
     const groupMapping = {
@@ -1383,13 +1415,21 @@ async function processPathingsByGroup(pathings, accountName) {
             pathing.cdTime = nextEightClock.toLocaleString();
             if (!localeWorks) pathing.cdTime = nextEightClock.toISOString();
 
+            // 更新剩余预计时间（离散跳跃）
             remainingEstimatedTime -= pathing.t;
-            const actualUsedTime = (new Date() - groupStartTime) / 1000;
-            const predictRemainingTime = remainingEstimatedTime * actualUsedTime / (totalEstimatedTime - remainingEstimatedTime - skippedTime);
+            
+            // 更新卡尔曼滤波器：基于刚完成的路线效率比
+            const singlePathActualTime = pathTime / 1000;  // 这条路线的实际用时（秒）
+            const singlePathPlannedTime = pathing.t;       // 这条路线的预计用时（秒）
+            kalmanFilter.updateEfficiency(singlePathActualTime, singlePathPlannedTime);
+            
+            // 使用更新后的效率比预测剩余时间
+            const kalmanPredicted = kalmanFilter.predictRemainingTime(remainingEstimatedTime);
+            
             // 将预计剩余时间转换为时、分、秒表示
-            const remaininghours = Math.floor(predictRemainingTime / 3600);
-            const remainingminutes = Math.floor((predictRemainingTime % 3600) / 60);
-            const remainingseconds = predictRemainingTime % 60;
+            const remaininghours = Math.floor(kalmanPredicted / 3600);
+            const remainingminutes = Math.floor((kalmanPredicted % 3600) / 60);
+            const remainingseconds = kalmanPredicted % 60;
             log.info(`当前进度：第 ${targetGroup} 组第 ${groupPathCount}/${totalPathsInGroup} 个  ${pathing.fileName}已完成，该组预计剩余: ${remaininghours} 时 ${remainingminutes} 分 ${remainingseconds.toFixed(0)} 秒`);
 
             await updateRecords(pathings, accountName);
