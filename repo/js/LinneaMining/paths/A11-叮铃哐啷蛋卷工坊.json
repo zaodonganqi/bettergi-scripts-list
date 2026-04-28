@@ -1,0 +1,112 @@
+﻿{
+  "info": {
+    "authors": [
+      {
+        "links": "https://github.com/zaodonganqi",
+        "name": "躁动的氨气"
+      }
+    ],
+    "bgi_version": "",
+    "description": "",
+    "enable_monster_loot_split": false,
+    "last_modified_time": 1777387528655,
+    "map_match_method": "",
+    "map_name": "Teyvat",
+    "name": "A11-叮铃哐啷蛋卷工坊",
+    "tags": [],
+    "type": "collect",
+    "version": "1.0"
+  },
+  "positions": [
+    {
+      "action": "",
+      "action_params": "",
+      "id": 1,
+      "move_mode": "walk",
+      "type": "teleport",
+      "x": 9955.2919921875,
+      "y": 1640.80615234375
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 2,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9965.328125,
+      "y": 1650.0078125
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 3,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9980.3857421875,
+      "y": 1656.65283203125
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 4,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9992.43359375,
+      "y": 1672.1748046875
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 5,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 10009.6748046875,
+      "y": 1666.6787109375
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 6,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 10018.6669921875,
+      "y": 1669.66015625
+    },
+    {
+      "action": "linnea_mining",
+      "action_params": "1,1",
+      "id": 7,
+      "move_mode": "walk",
+      "type": "orientation",
+      "x": 10024.068359375,
+      "y": 1667.921875
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 8,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 10055.427734375,
+      "y": 1648.951171875
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 9,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 10075.29296875,
+      "y": 1645.5791015625
+    },
+    {
+      "action": "linnea_mining",
+      "action_params": "1,1",
+      "id": 10,
+      "move_mode": "walk",
+      "type": "orientation",
+      "x": 10083.26171875,
+      "y": 1649.7373046875
+    }
+  ]
+}

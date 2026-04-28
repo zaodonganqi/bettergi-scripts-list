@@ -1,0 +1,8 @@
+[
+  {
+    "name": "partyName",
+    "type": "text_input",
+    "default": "",
+    "label": "队伍名称"
+  }
+]

@@ -1,0 +1,148 @@
+﻿{
+  "info": {
+    "authors": [
+      {
+        "links": "https://github.com/zaodonganqi",
+        "name": "躁动的氨气"
+      }
+    ],
+    "bgi_version": "",
+    "description": "",
+    "enable_monster_loot_split": false,
+    "last_modified_time": 1777387252680,
+    "map_match_method": "",
+    "map_name": "Teyvat",
+    "name": "A10-那夏镇左侧",
+    "tags": [],
+    "type": "collect",
+    "version": "1.0"
+  },
+  "positions": [
+    {
+      "action": "",
+      "action_params": "",
+      "id": 1,
+      "move_mode": "walk",
+      "type": "teleport",
+      "x": 9657.7421875,
+      "y": 1724.9033203125
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 2,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9664.3369140625,
+      "y": 1707.1240234375
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 3,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9657.1513671875,
+      "y": 1682.6220703125
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 4,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9663.412109375,
+      "y": 1667.2041015625
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 5,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9657.26171875,
+      "y": 1655.884765625
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 6,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9657.5673828125,
+      "y": 1644.076171875
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 7,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9661.8828125,
+      "y": 1608.4619140625
+    },
+    {
+      "action": "linnea_mining",
+      "action_params": "1,1",
+      "id": 8,
+      "move_mode": "walk",
+      "type": "orientation",
+      "x": 9657.48046875,
+      "y": 1602.06640625
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 9,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9691.748046875,
+      "y": 1595.42041015625
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 10,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9726.48046875,
+      "y": 1551.51806640625
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 11,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9773.6123046875,
+      "y": 1522.744140625
+    },
+    {
+      "action": "linnea_mining",
+      "action_params": "1,1",
+      "id": 12,
+      "move_mode": "walk",
+      "type": "orientation",
+      "x": 9780.69140625,
+      "y": 1526.978515625
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 13,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9789.048828125,
+      "y": 1522.7314453125
+    },
+    {
+      "action": "linnea_mining",
+      "action_params": "1,1",
+      "id": 14,
+      "move_mode": "walk",
+      "type": "orientation",
+      "x": 9797.8642578125,
+      "y": 1531.490234375
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+﻿{
+  "info": {
+    "authors": [
+      {
+        "links": "https://github.com/zaodonganqi",
+        "name": "躁动的氨气"
+      }
+    ],
+    "bgi_version": "",
+    "description": "",
+    "enable_monster_loot_split": false,
+    "last_modified_time": 1777387001602,
+    "map_match_method": "",
+    "map_name": "Teyvat",
+    "name": "A09-那夏镇下方",
+    "tags": [],
+    "type": "collect",
+    "version": "1.0"
+  },
+  "positions": [
+    {
+      "action": "",
+      "action_params": "",
+      "id": 1,
+      "move_mode": "walk",
+      "type": "teleport",
+      "x": 9367.1259765625,
+      "y": 1435.6396484375
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 2,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9379.958984375,
+      "y": 1420.1650390625
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 3,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9400.595703125,
+      "y": 1438.8447265625
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 4,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9407.234375,
+      "y": 1450.11865234375
+    },
+    {
+      "action": "",
+      "action_params": "",
+      "id": 5,
+      "move_mode": "walk",
+      "type": "path",
+      "x": 9506.060546875,
+      "y": 1474.32861328125
+    },
+    {
+      "action": "linnea_mining",
+      "action_params": "2,3",
+      "id": 6,
+      "move_mode": "walk",
+      "type": "orientation",
+      "x": 9511.0849609375,
+      "y": 1483.85205078125
+    }
+  ]
+}
